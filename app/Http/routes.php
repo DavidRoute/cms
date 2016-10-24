@@ -18,3 +18,13 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/admin', function(){
+
+	$arrs = ['default', 'primary', 'info', 'warning', 'success', 'danger'];
+
+	return view('admin.index', compact('arrs'));
+
+});
+
+Route::resource('admin/users', 'AdminUsersController');
