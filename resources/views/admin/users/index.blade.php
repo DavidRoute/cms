@@ -17,11 +17,11 @@
 					<thead>
 						<tr>
 							<th>ID</th>
+							<th>Photo</th>
 							<th>Name</th>
 							<th>Email</th>
 							<th>Role</th>
 							<th>Status</th>
-							<th>Photo</th>
 							<th>Created Date</th>
 							<th>Modified Date</th>
 						</tr>
@@ -30,13 +30,13 @@
 					@foreach($users as $user)
 						<tr>
 							<td>{{ $user->id }}</td>
+							<td class="user-photo">
+								<img src="{{ $user->photo ? $user->photo->file : 'no user photo'}}">
+							</td>
 							<td>{{ $user->name }}</td>
 							<td>{{ $user->email }}</td>
 							<td>{{ $user->role->name }}</td>
 							<td>{{ $user->is_active == 1 ? 'Active' : 'Not Active'}}</td>
-							<td class="user-photo">
-								<img src="{{ $user->photo ? $user->photo->file : 'no user photo'}}">
-							</td>
 							<td>{{ $user->created_at }}</td>
 							<td>{{ $user->updated_at }}</td>
 						</tr>
