@@ -12,7 +12,7 @@
 		<div class="panel-body">
 
 			
-			{!! Form::open(['action' => 'AdminUsersController@store', 'method' => 'POST']) !!}
+			{!! Form::open(['action' => 'AdminUsersController@store', 'method' => 'POST', 'files' => true]) !!}
 
 				{{ csrf_field() }}
 
@@ -57,9 +57,13 @@
 					@endif
 				</div>		
 
-				<div class="form-group">
-					{!! Form::label('photo', 'Choose Photo:') !!}
-					{!! Form::file('photo') !!}
+				<div class="form-group {{ $errors->has('photo_id') ? 'has-error' : '' }}">
+					{!! Form::label('photo_id', 'Choose Photo:') !!}
+					{!! Form::file('photo_id') !!}
+
+					@if($errors->has('photo_id'))
+						<span class="help-block"><strong>{{ $errors->first('photo_id') }}</strong></span>
+					@endif
 				</div>
 
 				<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">

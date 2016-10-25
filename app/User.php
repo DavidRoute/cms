@@ -7,14 +7,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 
 class User extends Authenticatable
-{
+{    
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'is_active'
+        'name', 'email', 'password', 'role_id', 'is_active', 'photo_id'
     ];
 
     /**
@@ -30,6 +31,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');        
     }
 
+    public function photo() {
+        return $this->belongsTo('App\Photo');
+    }
+
     #Accessor created_at & updated_at
     public function getCreatedAtAttribute($value) {
         return Carbon::parse($value)->diffForHumans();
@@ -37,6 +42,6 @@ class User extends Authenticatable
 
     public function getUpdatedAtAttribute($value) {
         return Carbon::parse($value)->diffForHumans();    
-    }
+    }   
 
 }
