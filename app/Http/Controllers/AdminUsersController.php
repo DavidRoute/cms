@@ -69,6 +69,7 @@ class AdminUsersController extends Controller
         User::create($input);
 
         return redirect()->route('admin.users.index')->with('info', 'Create User Successfully');
+
         
     }
 
@@ -89,9 +90,13 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)    
     {
-        //
+        $user = User::findOrFail($id);
+
+        $roles = Role::lists('name', 'id')->all();
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -103,7 +108,7 @@ class AdminUsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "This is update page";
     }
 
     /**

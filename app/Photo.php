@@ -14,8 +14,9 @@ class Photo extends Model
     // 	return $this->hasMany('App\User');
     // }
 
-    #Accessor
+    #User Photo Accessor
     public function getFileAttribute($photo) {
     	return $this->uploads . $photo;
-    }
+    }  
+
 }

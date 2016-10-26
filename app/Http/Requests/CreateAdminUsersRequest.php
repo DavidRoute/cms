@@ -28,7 +28,7 @@ class CreateAdminUsersRequest extends Request
             'email' => 'required|email|unique:users',
             'role_id' => 'required',
             'is_active' => 'required',
-            'photo_id' => 'required',
+            // 'photo_id' => 'required',
             'password' => 'required|min:6',
         ];
     }

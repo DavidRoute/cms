@@ -7,7 +7,7 @@
 	<div class="panel panel-primary">
 
 		<div class="panel-heading">
-			<h4>View All Users</h4>
+			<strong>View All Users</strong>
 		</div>
 
 		<div class="panel-body">
@@ -28,12 +28,12 @@
 					</thead>
 					<tbody>
 					@foreach($users as $user)
-						<tr>
+						<tr class="action">
 							<td>{{ $user->id }}</td>
 							<td class="user-photo">
-								<img src="{{ $user->photo ? $user->photo->file : 'no user photo'}}">
+								<img src="{{ $user->photo ? $user->photo->file : '/images/non_user.png'}}" alt="">
 							</td>
-							<td>{{ $user->name }}</td>
+							<td><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
 							<td>{{ $user->email }}</td>
 							<td>{{ $user->role->name }}</td>
 							<td>{{ $user->is_active == 1 ? 'Active' : 'Not Active'}}</td>

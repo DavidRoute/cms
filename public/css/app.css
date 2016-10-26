@@ -4,3 +4,7 @@
 .user-photo img{
 	height: 100px;
 }
+
+.panel-heading {
+	font-size: 16px;	
+}
