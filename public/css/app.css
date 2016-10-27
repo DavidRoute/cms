@@ -8,3 +8,19 @@
 .panel-heading {
 	font-size: 16px;	
 }
+
+.action .part {
+	display: none;
+}
+
+.action:hover .part {
+	display: block;
+}
+
+.part form {
+	display: inline;
+}
+
+.part #btn-del {
+	color: #900;
+}

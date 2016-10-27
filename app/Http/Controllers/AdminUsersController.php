@@ -119,6 +119,6 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "This is destory page";
     }
 }

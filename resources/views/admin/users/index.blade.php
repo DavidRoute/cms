@@ -33,7 +33,19 @@
 							<td class="user-photo">
 								<img src="{{ $user->photo ? $user->photo->file : '/images/non_user.png'}}" alt="">
 							</td>
-							<td><a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a></td>
+							<td>
+								<a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
+									
+								<div class="part">
+									<a href="{{ route('admin.users.edit', $user->id) }}"> Edit</a> | 
+									
+									{!! Form::open(['action'=> ['AdminUsersController@destroy', $user->id], 'method'=>'DELETE']) !!}
+										
+										{!! Form::submit('Delete', ['class'=>'btn btn-link', 'id'=>'btn-del', 'onclick'=>'return confirm("Are you Sure")']) !!}
+
+									{!! Form::close() !!}
+								</div>
+							</td>
 							<td>{{ $user->email }}</td>
 							<td>{{ $user->role->name }}</td>
 							<td>{{ $user->is_active == 1 ? 'Active' : 'Not Active'}}</td>
