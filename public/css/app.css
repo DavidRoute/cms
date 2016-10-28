@@ -10,11 +10,11 @@
 }
 
 .action .part {
-	display: none;
+	visibility: hidden;
 }
 
 .action:hover .part {
-	display: block;
+	visibility: visible;
 }
 
 .part form {

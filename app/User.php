@@ -35,7 +35,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
-    #Accessor created_at & updated_at
+    #Accessor For created_at & updated_at
     public function getCreatedAtAttribute($value) {
         return Carbon::parse($value)->diffForHumans();
     }
@@ -43,5 +43,19 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute($value) {
         return Carbon::parse($value)->diffForHumans();    
     }   
+
+    #Mutator For Password, Name & Email
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = bcrypt( trim($password));
+    }
+
+    public function setNameAttribute($name) {
+        $this->attributes['name'] = trim($name);
+    }
+
+    public function setEmailAttribute($email) {
+        $this->attributes['email'] = trim($email);
+    }
+
 
 }

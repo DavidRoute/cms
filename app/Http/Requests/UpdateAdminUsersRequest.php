@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateAdminUsersRequest extends Request
+class UpdateAdminUsersRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,7 +12,7 @@ class CreateAdminUsersRequest extends Request
      * @return bool
      */
     public function authorize()
-    {
+    {        
         return true;
     }
 
@@ -22,14 +22,15 @@ class CreateAdminUsersRequest extends Request
      * @return array
      */
     public function rules()
-    {
+    {      
+        $id = $this->route('users');        
+
         return [
-            'name' => 'required', 
-            'email' => 'required| email| unique:users',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'. $id,
             'role_id' => 'required',
             'is_active' => 'required',
             'photo_id' => 'required| mimes:jpeg,jpg,png,gif| max:1000',
-            'password' => 'required|min:6',
         ];
     }
 }

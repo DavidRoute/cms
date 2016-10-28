@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Requests\CreateAdminUsersRequest;
+use App\Http\Requests\UpdateAdminUsersRequest;
 
 use App\User;
 use App\Role;
@@ -44,12 +45,10 @@ class AdminUsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreateAdminUsersRequest $request)
-    {      
-        // return $request->all();        
-        
-
+    {              
         $input = $request->all();
 
+        #For Photo
         if($request->hasFile('photo_id')) {
 
             $file = $request->file('photo_id');
@@ -64,7 +63,7 @@ class AdminUsersController extends Controller
 
         }
 
-        $input['password'] = bcrypt($request->password);
+        // $input['password'] = bcrypt($request->password);
 
         User::create($input);
 
@@ -106,9 +105,37 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdminUsersRequest $request, $id)
     {
-        return "This is update page";
+        $user = User::findOrFail($id);       
+
+        #For Password
+        if( trim($request->password) == '') {
+
+            $input = $request->except('password');
+
+        } else {
+
+            $input = $request->all();
+        }        
+
+        #For Photo
+        if($request->hasFile('photo_id')) {
+
+            $file = $request->file('photo_id');
+
+            $name = time() . $file->getClientOriginalName();
+
+            $file->move('images', $name);
+
+            $photo = Photo::create(['file' => $name]);
+
+            $input['photo_id'] = $photo->id;
+        }
+
+        $user->update($input);
+
+        return redirect('/admin/users')->with('info', 'Update User Successfully');
     }
 
     /**
@@ -119,6 +146,12 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        return "This is destory page";
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        $user->photo()->delete();        
+
+        return redirect()->route('admin.users.index')->with('info', 'Delete User Successfully');
     }
 }

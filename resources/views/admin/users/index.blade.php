@@ -17,7 +17,7 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Photo</th>
+							<th>Photo</th>				
 							<th>Name</th>
 							<th>Email</th>
 							<th>Role</th>
@@ -32,7 +32,7 @@
 							<td>{{ $user->id }}</td>
 							<td class="user-photo">
 								<img src="{{ $user->photo ? $user->photo->file : '/images/non_user.png'}}" alt="">
-							</td>
+							</td>							
 							<td>
 								<a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
 									

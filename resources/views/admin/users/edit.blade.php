@@ -17,7 +17,7 @@
 			
 			<div class="panel-body">
 				
-				{!! Form::model( $user, ['action' => ['AdminUsersController@update', $user->id], 'method' => 'PATCH', 'files' => true]) !!}
+				{!! Form::model( $user, ['action' => ['AdminUsersController@update', $user->id], 'method' => 'PUT', 'files' => true]) !!}
 
 					<div class="form-group {{ $errors->has('name') ? 'has-error': '' }}" >
 						{!! Form::label('name', 'Name:') !!}					
