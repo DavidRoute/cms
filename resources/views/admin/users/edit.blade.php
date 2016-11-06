@@ -3,7 +3,7 @@
 @section('page_heading', 'Users')
 
 @section('content')
-
+	
 	<div class="col-sm-2">
 		<img src="{{ $user->photo ? $user->photo->file : '/images/non_user.png' }}" class="img-responsive img-rounded">
 	</div>

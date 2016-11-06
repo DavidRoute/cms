@@ -230,7 +230,7 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user fa-fw"></i> {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -238,7 +238,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="{{ url ('login') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ url ('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -262,9 +262,9 @@
                             <!-- /input-group -->
                         </li>
                         <li {{ (Request::is('/') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="{{ url ('/admin') }}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
-
+                        @if(Auth::user()->role->name == 'administrator' && Auth::user()->is_active == 1)
                         <li >
                             <a href="#"><i class="fa fa-user fa-fw"></i>Users<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -278,12 +278,13 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        @endif
 
                         <li >
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Posts<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/posts') }}">View All Posts</a>
+                                    <a href="{{ url('/admin/posts') }}">View All Posts</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/posts/create' ) }}">Add Post</a>
@@ -410,7 +411,7 @@
         <div id="page-wrapper">
 			 <div class="row">
                 <div class="col-lg-12">
-                    <h1>@yield('page_heading')</h1>
+                    <h1>@yield('page_heading')</h1>                    
                 </div>
                 <!-- /.col-lg-12 -->                
             </div>
@@ -418,8 +419,10 @@
             <hr>
 
 			<div class="row">  
-				@yield('content')
-
+                <div class="col-md-12">
+				    @yield('content')
+                </div>
+                <!-- /.col-md-12 -->
             </div>
             <!-- /#page-wrapper -->
         </div>

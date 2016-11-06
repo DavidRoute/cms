@@ -14,6 +14,10 @@ use App\Photo;
 
 class AdminUsersController extends Controller
 {
+    // public function __construct() {
+    //     $this->middleware(['auth', 'admin']);
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +26,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         $users = User::all();
-
+        
         return view('admin.users.index', compact('users'));
     }
 
@@ -48,7 +52,7 @@ class AdminUsersController extends Controller
     {              
         $input = $request->all();
 
-        #For Photo
+        #For Photo 
         if($request->hasFile('photo_id')) {
 
             $file = $request->file('photo_id');
@@ -148,10 +152,15 @@ class AdminUsersController extends Controller
     {
         $user = User::findOrFail($id);
 
+        unlink(public_path(). $user->photo->file);
+
         $user->delete();
 
-        $user->photo()->delete();        
+        $user->photo()->delete();  
+
+        // session()->flash('info', 'Delete User Successfully');
 
         return redirect()->route('admin.users.index')->with('info', 'Delete User Successfully');
     }
+    
 }

@@ -57,5 +57,17 @@ class User extends Authenticatable
         $this->attributes['email'] = trim($email);
     }
 
+    #For Admin Middleware & Is Active
+    public function isAdmin() {
 
+        if($this->role->name == 'administrator' && $this->is_active == 1) {            
+            return true;
+        } 
+
+        return false;        
+    }    
+
+    public function posts() {
+        return $this->hasMany('App\Post');
+    }
 }

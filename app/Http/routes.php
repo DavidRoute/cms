@@ -17,14 +17,21 @@ Route::get('/', function () {
 
 Route::auth();
 
+
 Route::get('/home', 'HomeController@index');
 
-Route::get('/admin', function(){
 
-	$arrs = ['default', 'primary', 'info', 'warning', 'success', 'danger'];
+Route::get('/admin', function() {	
 
-	return view('admin.index', compact('arrs'));
+	return view('admin.index');
+
+})->middleware(['auth']);
+
+
+Route::group(['middleware' => ['admin']] , function() {
+
+	Route::resource('/admin/users', 'AdminUsersController');
+	Route::resource('/admin/posts', 'AdminPostsController');
+	Route::resource('/admin/categories', 'AdminCategoriesController');
 
 });
-
-Route::resource('admin/users', 'AdminUsersController');

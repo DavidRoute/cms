@@ -4,6 +4,8 @@
 
 @section('content')
 	
+	@include('common.success')
+
 	<div class="panel panel-primary">
 
 		<div class="panel-heading">
