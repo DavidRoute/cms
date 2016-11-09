@@ -14,7 +14,7 @@ class Category extends Model
     	return $this->hasMany('App\Post');
     }
 
-    #For Timestamps
+    #Accessor For Timestamps
     public function getCreatedAtAttribute($value) {
     	return Carbon::parse($value)->diffForHumans();
     }
@@ -22,4 +22,5 @@ class Category extends Model
     public function getUpdatedAtAttribute($value) {
     	return Carbon::parse($value)->diffForHumans();
     }
+
 }

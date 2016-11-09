@@ -65,9 +65,13 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)    
     {
-        //
+        $categories = Category::all();
+
+        $category = Category::findOrFail($id);
+
+        return view('admin.categories.edit', compact('category', 'categories'));
     }
 
     /**
@@ -77,9 +81,13 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateCategoriesRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->all());
+
+        return redirect('/admin/categories')->with('info', 'Updaet Category Successfully');
     }
 
     /**
@@ -90,6 +98,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+
+        return redirect('/admin/categories')->with('info', 'Delete Category Successfully');
     }
 }

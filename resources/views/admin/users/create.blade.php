@@ -33,7 +33,7 @@
 
 				<div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
 					{!! Form::label('role_id', 'Role:') !!}
-					{!! Form::select('role_id', ['' => 'Choose Option'] + $roles, null, ['class' => 'form-control']) !!}
+					{!! Form::select('role_id', ['' => 'Choose Category'] + $roles, null, ['class' => 'form-control']) !!}
 
 					@if($errors->has('role_id'))
 						<span class="help-block"><strong>{{ $errors->first('role_id') }}</strong></span>

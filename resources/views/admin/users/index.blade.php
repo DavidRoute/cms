@@ -36,10 +36,12 @@
 								<img src="{{ $user->photo ? $user->photo->file : '/images/non_user.png'}}" alt="">
 							</td>							
 							<td>
-								<a href="{{ route('admin.users.edit', $user->id) }}">{{ $user->name }}</a>
+								<a href="{{ route('admin.users.edit', $user->id) }}">
+									<strong>{{ $user->name }}</strong>
+								</a>
 									
 								<div class="part">
-									<a href="{{ route('admin.users.edit', $user->id) }}"> Edit</a> | 
+									<a href="{{ route('admin.users.edit', $user->id) }}">Edit</a> | 
 									
 									{!! Form::open(['action'=> ['AdminUsersController@destroy', $user->id], 'method'=>'DELETE']) !!}
 										

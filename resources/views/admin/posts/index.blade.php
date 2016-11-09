@@ -31,13 +31,25 @@
 					<tbody>
 					@if($posts)
 						@foreach($posts as $post)
-						<tr>
+						<tr class="action">
 							<td>{{ $post->id }}</td>
 							<td class="post-photo">
 								<img src="{{ $post->photo ? $post->photo->file : '/images/non_user.png' }}" alt="">
 							</td>
-							<td>{{ $post->title }}</td>
-							<td>{{ $post->body }}</td>
+							<td>
+								<a href="{{ route('admin.posts.edit', $post->id) }}">
+									<strong>{{ $post->title }}</strong>
+								<a>
+
+								<div class="part">
+									<a href="{{ route('admin.posts.edit', $post->id) }}">Edit</a>
+
+									{!! Form::open(['action' => ['AdminPostsController@destroy', $post->id], 'method' => 'DELETE']) !!}	
+										{!! Form::submit('Delete', ['class' => 'btn btn-link', 'id' => 'btn-del', 'onclick' => 'return confirm("Are You Sure");']) !!}
+									{!! Form::close() !!}
+								</div>
+							</td>
+							<td>{{ str_limit($post->body, 15) }}</td>
 							<td>{{ $post->user->name }}</td>
 							<td>{{ $post->category ? $post->category->name : 'Uncategorized' }}</td>																					
 							<td>{{ $post->created_at }}</td>

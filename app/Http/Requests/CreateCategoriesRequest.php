@@ -22,9 +22,11 @@ class CreateCategoriesRequest extends Request
      * @return array
      */
     public function rules()
-    {        
+    {      
+        $id = $this->route('categories');
+
         return [
-            'name' => 'required'
+            'name' => 'required|unique:categories,name,'. $id
         ];
     }
 }

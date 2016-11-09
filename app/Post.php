@@ -33,4 +33,13 @@ class Post extends Model
 		return Carbon::parse($value)->diffForHumans();
 	}	
 
+	#Mutators For title, body
+	public function setTitleAttribute($title) {
+		$this->attributes['title'] = trim($title);
+	}
+
+	public function setBodyAttribute($body) {
+		$this->attributes['body'] = trim($body);
+	}
+
 }
